@@ -32,9 +32,11 @@ class Board:
         return str(board_df)
 
     def take(self, row, col):
-
-
-    
+        self.row= row
+        self.row= ["1","1","1","1"]
+        self.col = col
+        self.col = 3
+        ash=
 class Player:
     def __init__(self):
         pass
