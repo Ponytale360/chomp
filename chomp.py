@@ -32,11 +32,12 @@ class Board:
         return str(board_df)
 
     def take(self, row, col):
-        self.row= row
-        self.row= ["1","1","1","1"]
-        self.col = col
-        self.col = 3
-        ash=
+        row = [1,1,1,1]
+        row.take[2:] = 0
+        s = [1,1,1,1]
+        a = [1,1,1,1]
+        board = [row, s, a]
+
 class Player:
     def __init__(self):
         pass
