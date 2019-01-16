@@ -11,6 +11,10 @@ class ChompGame:
         self.p2 = Player()
         self.turn = random.choice([self.p1, self.p2])
 
+    def board_length( self, size == (3,4)):
+        self.size = size
+        if self.p1
+
     def __repr__(self):
         pass
 
