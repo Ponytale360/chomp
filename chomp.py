@@ -1,12 +1,15 @@
 import numpy as np
 import pandas as pd
+import random
 
 EMOJI = {-1: '\u2612', 0: ' ', 1: '\u2610'}
 
 
 class ChompGame:
-    def __init__(self):
-        self.
+    def __init__(self, size == (3,4)):
+        self.p1 = Player()
+        self.p2 = Player()
+        self.turn = random.choice([self.p1, self.p2])
 
     def __repr__(self):
         pass
@@ -32,15 +35,14 @@ class Board:
         return str(board_df)
 
     def take(self, row, col):
-        row = [1,1,1,1]
-        row.take[2:] = 0
-        s = [1,1,1,1]
-        a = [1,1,1,1]
-        board = [row, s, a]
+        for r in range(row + 1):
+            self.state[r][col:] = 0
 
 class Player:
-    def __init__(self):
-        pass
+    def __init__(self, score = 0, name = None):
+        self.score = score
+        self.name = name
+        self.name = input('Enter your name:')
 
     def __repr__(self):
-        pass
+        return f'Player(score = {self.score}, name = {self.name})'
