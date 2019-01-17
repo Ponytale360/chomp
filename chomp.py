@@ -6,14 +6,24 @@ EMOJI = {-1: '\u2612', 0: ' ', 1: '\u2610'}
 
 
 class ChompGame:
-    def __init__(self, size == (3,4)):
+    def __init__(self, size = (3,4)):
         self.p1 = Player()
         self.p2 = Player()
         self.turn = random.choice([self.p1, self.p2])
 
-    def board_length( self, size == (3,4)):
+    def board_length( self, size = (3,4)):
         self.size = size
-        if self.p1
+        self.size = [(3,4),(6,7),(10,10)]
+        yelp = input('Choose your board size. You get to choose between sizes: 3 x 4, 6 x 7, 10 x 10. You choose:')
+        size1 = "(3,4)" or "3 x 4" or "3x4"
+        size2 = "(6,7)" or "6 x 7" or "6x7"
+        size3 = "(10,10)" or "10 x 10" or "10x10"
+        if int(yelp) == size1:
+            return size = (3,4)
+        if int(yelp) == size2:
+            return size = (6,7)
+        if int(yelp) == size3:
+            return size = (10,10)
 
     def __repr__(self):
         pass
