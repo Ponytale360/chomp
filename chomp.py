@@ -1,18 +1,22 @@
 import numpy as np
 import pandas as pd
 import random
+import itertools
 
 EMOJI = {-1: '\u2612', 0: ' ', 1: '\u2610'}
 
 
 class ChompGame:
     """Contains the control flow for the game"""
-    def __init__(self, n_players=2, size=(3, 4)):
+    def __init__(self, n_players=2, size=(3, 4), m_player=1, p_player=1):
         self.n_players = n_players
         self.size = size
         self.board = Board(*size)
+        self.m_player = m_player
+        self.p_player = p_player
         self.game_over = False
-        self.players = []
+        self.players = [m_player, p_player]
+        self.order_of_players = []
         self.current_player = None
 
     def __repr__(self):
@@ -21,12 +25,14 @@ class ChompGame:
     def play(self):
         self.setup()
         while not self.game_over:
-            print(f'{self.current_player}, it\'s your turn!\n')
+            for k in self.order_of_players:
+                print(f'{k}, it\'s your turn!\n')
             print(self.board)
             self.move()
+            yield itertools.cycle(self.order_of_players)
             if self.board.state[-1][0] == 0:
                 self.game_over = True
-                self.current_player.wins += 1
+                self.current_player.wins -= 1
 
     def setup(self):
         for i in range(1, self.n_players + 1):
@@ -34,6 +40,11 @@ class ChompGame:
             self.players.append(Player())
 
         self.current_player = random.choice(self.players)
+
+        if self.current_player == self.p_player:
+            self.order_of_players = [self.current_player, self.m_player]
+        if self.current_player == self.m_player:
+            self.order_of_players = [self.current_player, self.p_player]
 
     def move(self):
         coord_str = input("Enter the coordinates for your move. (e.g. A3)")
@@ -44,6 +55,7 @@ class ChompGame:
 
 
 class Board:
+
     def __init__(self, rows, cols):
         # Use a 2d array to store board state
         # ones for chocolate, zeros for eaten squares, and -1 for poison
@@ -64,7 +76,7 @@ class Board:
 
     def take(self, row, col):
         # self.state[:row+1, col:] = 0
-        for r in range(row+1):
+        for r in range(row + 1):
             self.state[r][col:] = 0
 
 
@@ -79,3 +91,6 @@ class Player:
     def __str__(self):
         return self.name
 
+
+if __name__ == "__main__":
+    ChompGame().play()
